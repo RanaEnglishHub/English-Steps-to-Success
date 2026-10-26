@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>English Steps · Scored Learning Progress (Review V6)</title><style>
+:root{font-family:Arial,sans-serif;color:#15324a;background:#eef7f8}*{box-sizing:border-box}body{margin:0}header{background:linear-gradient(110deg,#102d4e,#047e86);color:white;padding:32px max(24px,calc((100vw - 1050px)/2))}h1{margin:4px 0 8px;font-size:clamp(28px,4vw,43px)}.subtitle{opacity:.92}main{max-width:1050px;margin:24px auto 70px;padding:0 18px}.banner{background:#fff6da;color:#614907;padding:13px 18px;border-radius:12px;margin-bottom:18px;border:1px solid #e6cb70}.panel{background:white;border:1px solid #d7e6eb;padding:22px;border-radius:17px;margin:16px 0;box-shadow:0 6px 20px #132e4410}.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}label{display:block;font-weight:bold;font-size:14px}input{display:block;width:100%;border:1px solid #afc5ce;border-radius:8px;padding:11px;margin-top:7px;font:inherit}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.metric{padding:17px;border:1px solid #d3e5e8;border-radius:13px;background:#f3fbfa}.metric b{display:block;font-size:27px;color:#057782;padding-top:7px}.muted{color:#5d7180;font-size:13px}.bar{height:15px;border-radius:12px;background:#dcebef;overflow:hidden;margin-top:10px}.fill{height:100%;background:linear-gradient(90deg,#13a8a0,#44c3a0)}table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid #e5eef1;text-align:left;padding:11px 8px;font-size:14px}th{background:#eef7f8}button,.linkbtn{border:0;background:#047e86;color:white;padding:12px 19px;border-radius:10px;cursor:pointer;font-size:15px;text-decoration:none;display:inline-block;margin:5px 9px 5px 0}button.secondary,.linkbtn.secondary{background:#29485c}button:focus-visible{outline:3px solid gold}.foot{font-size:12px;color:#55707e;text-align:center;padding:15px}.small{font-size:13px}.scroller{overflow-x:auto}@media print{header{background:#fff!important;color:#15324a;padding:8px 0}.no-print,.banner{display:none!important}main{margin:0;max-width:none}.panel{box-shadow:none;break-inside:auto;page-break-inside:auto;padding:14px;margin:8px 0}.metric{break-inside:avoid;page-break-inside:avoid;padding:10px}.cards{gap:8px}.scroller{overflow:visible}thead{display:table-header-group}tr{break-inside:avoid;page-break-inside:avoid}h2{break-after:avoid;page-break-after:avoid}body{background:white}.metric b{color:#15324a}}
+</style></head><body><header><div class="subtitle">ENGLISH STEPS TO SUCCESS · REVIEW V6</div><h1>My Learning Progress</h1><div class="subtitle">Diagnostic · Six-Week Programme · Interactive Library · Progress Report</div></header><main><div class="banner"><b>Preview / not published.</b> This standalone draft reads progress saved by the existing website when opened on the same website origin and browser. It does not send student information anywhere. The website's existing files have not been changed.</div><section class="panel no-print"><h2>My details</h2><div class="fields"><label>Student name<input id="name" autocomplete="off" placeholder="Enter your name"></label><label>Class / Grade<input id="grade" placeholder="e.g. Grade 12 General"></label><label>Teacher<input id="teacher" placeholder="Teacher's name"></label></div><p class="muted">These fields are stored only in this browser for use on the printed report. Avoid shared devices for personal data.</p></section><section class="panel"><p><b>Student:</b> <span id="reportStudent">Not entered</span> · <b>Grade:</b> <span id="reportGrade">Not entered</span> · <b>Teacher:</b> <span id="reportTeacher">Not entered</span></p><h2>Learning overview</h2><div class="cards"><div class="metric">Diagnostic assessment<b id="pre">Not yet completed</b><span class="muted">Website assessment record</span></div><div class="metric">Final assessment<b id="post">Not yet completed</b><span class="muted">Website assessment record</span></div><div class="metric improvement-metric">Assessment improvement<b id="improvement">Not available</b><span class="muted" id="improvementNote">Objective scores compared when both assessments are available</span></div><div class="metric">Weekly programme<b id="weeks">0 / 6</b><span class="muted">Weeks with recorded activity</span></div><div class="metric">Library units practised<b id="units">0 / 36</b><span class="muted">Units with a completed activity</span></div></div></section><section class="panel"><h2>Diagnostic and final assessment marks</h2><p class="muted">Objective marks are automatically scored. Writing marks are a provisional automated estimate, not a teacher-assessed score.</p><div id="assessmentMarks"></div></section><section class="panel"><h2>Skills performance · Interactive Library</h2><p class="muted">First-attempt accuracy includes only questions checked since the updated tracking was introduced. Older practice is retained as completion only.</p><div id="skillMarks"></div></section><section class="panel"><h2>Six-week remedial programme</h2><div id="weekTable"></div></section><section class="panel"><h2>Interactive Learning Library</h2><p class="small">Counts indicate units with at least one completed activity, not fully completed units or teacher-verified proficiency.</p><div id="libraryTable"></div></section><section class="panel"><h2>Learning reflection</h2><p class="small">My strongest skill: <span id="strongSkill">________________________________</span></p><p class="small">A skill I still need to practise: <span id="nextSkill">________________________________</span></p><div class="no-print fields"><label>My strongest skill<input id="strength" placeholder="e.g. Vocabulary"></label><label>My next learning target<input id="target" placeholder="e.g. Reading inference"></label></div></section><section class="panel no-print"><h2>Download / submit report</h2><p>Use <b>Print / Save as PDF</b> to create a consolidated report, then upload it to your school's LMS. The website does not automatically submit it to a teacher.</p><button id="print">Print / Save as PDF</button><button class="secondary" id="refresh">Refresh results</button><a class="linkbtn secondary" href="index.html">Original Website</a><a class="linkbtn secondary" href="interactive-library.html">Learning Library</a></section><div class="foot">Prepared and Developed by Miss Rana Rayes · Teacher verification is required for writing and formal assessment marks.</div></main><script>
+const profileKey='english_steps_progress_dashboard_profile_v1';const fields=['name','grade','teacher','strength','target'];let profile={};try{profile=JSON.parse(localStorage.getItem(profileKey)||'{}')||{}}catch(e){};for(const id of fields){const el=document.getElementById(id);el.value=profile[id]||'';el.addEventListener('input',()=>{profile[id]=el.value;try{localStorage.setItem(profileKey,JSON.stringify(profile))}catch(e){};showReflection();showIdentity()})}function showIdentity(){for(const [id,key] of [['reportStudent','name'],['reportGrade','grade'],['reportTeacher','teacher']])document.getElementById(id).textContent=profile[key]||'Not entered'}showIdentity();function showReflection(){document.getElementById('strongSkill').textContent=profile.strength||'________________________________';document.getElementById('nextSkill').textContent=profile.target||'________________________________'}showReflection();function store(key){try{return JSON.parse(localStorage.getItem(key)||'null')||{}}catch(e){return {}}}function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function recordCount(o){return o&&typeof o==='object'?Object.keys(o).length:0}
+const lib=[['Pre-A1','english-steps-prea1-progress-v2'],['A1','english-steps-a1-progress-v1'],['A2','english-steps-a2-progress-v1'],['A2–B1','english-steps-a2b1-bridge-progress-v1'],['B1–B2','english-steps-b1b2-progress-v1'],['B2','english-steps-b2-mastery-progress-v1']];function update(){const assessments=store('english_steps_success_assessments_v1'),weekly=store('english_steps_success_progress_v1');for(const [key,id] of [['pre','pre'],['post','post']]){const a=assessments[key]||{};document.getElementById(id).textContent=a.submitted?'See marks below':'Not yet completed'}const records=weekly.records||{};
+const weeks=new Set();
+// Only submitted objective questions earn marks. Missing submissions are not labelled incorrect.
+const QUESTION_TOTALS={"1":{"Pre-A1":{"v":4,"g":3,"r":4},"A1":{"v":4,"g":4,"r":4},"A2":{"v":4,"g":2,"r":4}},"2":{"Pre-A1":{"v":4,"g":6,"r":4},"A1":{"v":4,"g":6,"r":4},"A2":{"v":4,"g":6,"r":4}},"3":{"Pre-A1":{"v":4,"g":6,"r":4},"A1":{"v":4,"g":6,"r":4},"A2":{"v":4,"g":6,"r":4}},"4":{"Pre-A1":{"v":4,"g":6,"r":4},"A1":{"v":4,"g":6,"r":4},"A2":{"v":4,"g":6,"r":4}},"5":{"Pre-A1":{"v":4,"g":6,"r":4},"A1":{"v":4,"g":6,"r":4},"A2":{"v":4,"g":6,"r":4}},"6":{"Pre-A1":{"v":4,"g":6,"r":4},"A1":{"v":4,"g":6,"r":4},"A2":{"v":4,"g":6,"r":4}}};
+const weeklyLevels=[];
+for(let w=1;w<=6;w++){
+  let weekHasEvidence=false;
+  for(const [key,r] of Object.entries(records)){
+    if(!key.startsWith(w+'|') || !r || typeof r!=='object')continue;
+    const level=key.slice(String(w).length+1);
+    const groups=[['Vocabulary','v'],['Grammar','g'],['Reading','r']];
+    const skillRows=groups.map(([label,g])=>{
+      const answers=r.sections?.[g]?.answers||{};
+      const submitted=Object.values(answers).filter(a=>a&&a.submitted===true);
+      const correct=submitted.filter(a=>a.correct===true).length;
+      const attempted=submitted.length;
+      // The original site's question count is specific to each week and level;
+      // this dashboard uses submitted counts rather than guessing a denominator.
+      return {label,correct,attempted,total:QUESTION_TOTALS[String(w)]?.[level]?.[g] ?? 0};
+    });
+    const submittedCount=skillRows.reduce((n,z)=>n+z.attempted,0);
+    const correctCount=skillRows.reduce((n,z)=>n+z.correct,0);
+    const availableCount=skillRows.reduce((n,z)=>n+z.total,0);
+    const writing=!!r.writing?.submitted;
+    const challenge=!!r.challenge?.submitted;
+    const found=submittedCount>0 || writing || challenge;
+    if(!found)continue;
+    weekHasEvidence=true;
+    weeklyLevels.push({week:w,level,correctCount,submittedCount,availableCount,skillRows,writing,challenge});
+  }
+  if(weekHasEvidence)weeks.add(w);
+}
+let rows=[];
+for(let w=1;w<=6;w++){
+  const results=weeklyLevels.filter(x=>x.week===w);
+  if(!results.length){rows.push(`<tr><td>Week ${w}</td><td>—</td><td>No submitted activity</td><td>—</td><td>—</td></tr>`);continue;}
+  for(const r of results){
+    const detail=r.skillRows.map(z=>`${z.label}: ${z.correct}/${z.total} (${z.attempted}/${z.total} submitted)`).join(' · ');
+    const mark=r.submittedCount?`${r.correctCount}/${r.availableCount} (${r.submittedCount}/${r.availableCount} submitted)`:'No objective answers submitted';
+    const status=[r.writing?'Writing feedback recorded':'Writing not recorded',r.challenge?'Challenge submitted':''].filter(Boolean).join('; ');
+    rows.push(`<tr><td>Week ${w}</td><td>${esc(r.level)}</td><td>${mark}<div class="muted">${detail}</div></td><td>${status}</td><td>${r.submittedCount===r.availableCount?'Objective sections complete':'Partial: objectives incomplete'}; see weekly PDF</td></tr>`);
+  }
+}
+document.getElementById('weeks').textContent=weeks.size+' / 6';
+document.getElementById('weekTable').innerHTML='<p class="muted">Verified scores use the same total number of available objective questions as the original weekly report. Only submitted answers earn credit; incomplete work remains labelled partial. The dashboard shows the latest saved browser record, which may differ from an older PDF saved before answers were changed or resubmitted.</p><div class="scroller"><table><thead><tr><th>Week</th><th>Level</th><th>Verified score and submission status</th><th>Writing / challenge</th><th>Completion</th></tr></thead><tbody>'+rows.join('')+'</tbody></table></div>';
+// Assessment questions: 4 vocabulary, 6 grammar, 6 reading. The answer key is stored in the existing homepage script.
+// To avoid duplicating answer keys here, the homepage publishes a small scored summary to browser storage.
+let summary=store('english_steps_assessment_score_summary_v2');
+// When opened from index.html, accept only a score summary in the URL fragment.
+// No student name or writing text is transmitted, and nothing is uploaded.
+try{
+  if(location.hash.startsWith('#assessment=')){
+    const incoming=JSON.parse(decodeURIComponent(location.hash.slice('#assessment='.length)));
+    if(incoming && typeof incoming==='object'){
+      const sanitized={};
+      for(const key of ['pre','post']){
+        const d=incoming[key];
+        if(d&&d.submitted&&['v','g','r','objective','writing','combined'].every(k=>Number.isFinite(Number(d[k])))){
+          sanitized[key]={submitted:true,v:Number(d.v),g:Number(d.g),r:Number(d.r),objective:Number(d.objective),writing:Number(d.writing),combined:Number(d.combined),date:d.date||null};
+        }
+      }
+      if(Object.keys(sanitized).length){summary=sanitized;try{localStorage.setItem('english_steps_assessment_score_summary_v2',JSON.stringify(summary))}catch(e){}}
+    }
+  }
+}catch(e){console.warn('Assessment score transfer was not readable',e)}
+
+const cells=['pre','post'].map(k=>{const d=summary[k];if(!d||!d.submitted)return `<tr><td>${k==='pre'?'Initial diagnostic':'Final assessment'}</td><td colspan="5">Not available · open the original website and view this assessment's results once to sync marks</td></tr>`;return `<tr><td>${k==='pre'?'Initial diagnostic':'Final assessment'}</td><td>${d.v}/4</td><td>${d.g}/6</td><td>${d.r}/6</td><td>${d.objective}/16</td><td>${d.writing}/4 estimated · <b>${d.combined}/20</b></td></tr>`}).join('');
+// Use the verified scores already displayed in the table for the overview cards.
+// Never label a provisional writing estimate as teacher assessed.
+for(const [key,id] of [['pre','pre'],['post','post']]){
+  const d=summary[key];
+  const card=document.getElementById(id);
+  const note=card?.nextElementSibling;
+  if(d?.submitted && Number.isFinite(Number(d.objective))){
+    const haveWriting=Number.isFinite(Number(d.writing)) && Number.isFinite(Number(d.combined));
+    card.textContent=haveWriting ? `${d.combined}/20` : `${d.objective}/16`;
+    if(note)note.textContent=haveWriting ? `${d.objective}/16 objective + ${d.writing}/4 estimated writing` : 'Automatically scored objective questions';
+  }else{
+    card.textContent='Not yet available';
+    if(note)note.textContent='Complete and view the assessment on the main website';
+  }
+}
+const first=summary.pre,last=summary.post;
+const improvement=document.getElementById('improvement');
+const improvementNote=document.getElementById('improvementNote');
+if(first?.submitted && last?.submitted && Number.isFinite(Number(first.objective)) && Number.isFinite(Number(last.objective))){
+  const objectiveChange=Number(last.objective)-Number(first.objective);
+  const withWriting=['combined','writing'].every(k=>Number.isFinite(Number(first[k])) && Number.isFinite(Number(last[k])));
+  const change=withWriting ? Number(last.combined)-Number(first.combined) : objectiveChange;
+  improvement.textContent=`${change>0?'+':''}${change} / ${withWriting?'20':'16'}`;
+  improvementNote.textContent=withWriting ? `Includes estimated writing; objective change: ${objectiveChange>0?'+':''}${objectiveChange}/16` : 'Change in automatically scored objective marks';
+}else{
+  improvement.textContent='Not available';
+  improvementNote.textContent='Both assessments are needed to calculate improvement';
+}
+document.getElementById('assessmentMarks').innerHTML='<div class="scroller"><table><thead><tr><th>Assessment</th><th>Vocabulary</th><th>Grammar</th><th>Reading</th><th>Objective total</th><th>Estimated total</th></tr></thead><tbody>'+cells+'</tbody></table></div>';
+const skillNames={choose:'Grammar & vocabulary choices',order:'Sentence ordering',fix:'Grammar corrections',reading:'Reading comprehension',exit:'Unit review'};
+const stats={};let allAttempts=0;
+for(const [label,key] of lib){const saved=store(key);for(const [qid,record] of Object.entries(saved.attempts||{})){const kind=qid.split(':')[1];if(!skillNames[kind]||!record||!Number.isFinite(Number(record.count)))continue;const s=stats[kind]||(stats[kind]={questions:0,firstRight:0,checks:0,correctChecks:0});s.questions++;s.firstRight+=record.firstCorrect===true?1:0;s.checks+=Number(record.count)||0;s.correctChecks+=Number(record.correct)||0;allAttempts+=Number(record.count)||0;}}
+document.getElementById('skillMarks').innerHTML='<div class="scroller"><table><thead><tr><th>Practice type</th><th>Questions checked</th><th>First-check accuracy</th><th>Total checks</th></tr></thead><tbody>'+Object.entries(skillNames).map(([k,label])=>{const s=stats[k];return `<tr><td>${label}</td><td>${s?s.questions:0}</td><td>${s?Math.round(100*s.firstRight/s.questions)+'%':'Not yet recorded'}</td><td>${s?s.checks:0}</td></tr>`}).join('')+'</tbody></table></div><p class="muted">Total recorded checks: '+allAttempts+'. The percentage is based on the first checked response per question, not a formal test mark.</p>';
+let total=0;let levels=lib.map(([label,key])=>{const s=store(key);const count=new Set(Object.keys(s.completed||{}).filter(k=>s.completed[k]).map(k=>k.split(':')[0])).size;const capped=Math.min(6,count);total+=capped;return `<tr><td>${esc(label)}</td><td>${capped}/6</td><td><div class="bar"><div class="fill" style="width:${100*capped/6}%"></div></div></td></tr>`}).join('');document.getElementById('units').textContent=total+' / 36';document.getElementById('libraryTable').innerHTML='<div class="scroller"><table><thead><tr><th>Level</th><th>Units practised</th><th>Progress</th></tr></thead><tbody>'+levels+'</tbody></table></div>'}document.getElementById('refresh').addEventListener('click',update);document.getElementById('print').addEventListener('click',()=>{if(!profile.name?.trim())alert('Please enter your name before saving your report.');else window.print()});update();
+</script></body></html>
